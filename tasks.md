@@ -53,6 +53,47 @@ cat /proc/cmdline > /var/lab/3/13
 cat /proc/cmdline | tee /var/lab/3/13
 dmesg | grep "Command line" | cut -d: -f 2 | tee /var/lab/3/13
 
+Задание 3.14 Демон sshd
+Для выполнения задания с помошью утилит ps и grep опеределите PID демона sshd. Для изменения приоритета воспользуйтесь командой renice.
+ps fax | grep sshd
+renice -n -20 -p 1313
+
+Задание 3.15 Количество ресурсов (###НЕ ВЫПОЛНЕНО!!!)
+Для выполнения задания воспользуйтесь утилитами lscpu (nproc), free и fdisk. 
+nproc | tee /var/lab/3/15
+free -k
+echo 1883880 >> /var/lab/3/15
+fdisk -l | grep Disk
+echo 20631781376 >> /var/lab/3/15
+
+Задание 3.16 Задание с inodes
+Для выполнения задания воспользуйтесь утилитой df. 
+df -i /dev/mapper/centos-root
+echo 1191360 >  /var/lab/3/16
+
+Задание 3.17 Файл подкачки
+Для выполнения задания воспользуйтесь утилитами fallocate, chmod, mkswap, swapon. Для автоматического подключения файла подкачки во время загрузки используйте конфигурационный файл /etc/fstab.
+fallocate --length 1MiB /var/lab/3/17
+chmod 600 /var/lab/3/17 
+mkswap /var/lab/3/17
+swapon /var/lab/3/17
+echo "/var/lab/3/17 swap     swap     defaults     0     0" > /etc/fstab
+
+Задание 3.18 Монтирование каталога
+Для выполнения задания создайте директорию  /var/lab/3/18. В конфигурационном файле /etc/fstab укажите параметры монтирования. Не забудьте про команду mount -a.
+mkdir /var/lab/3/18; echo "tmpfs        /var/lab/3/18           tmpfs       noexec,size=1024k    0 0" > /etc/fstab ; mount -a
+
+Задание 3.19 Список файловых систем
+Для выполнения задания отмонтируйте /var/lab/3/18, выведите содержимое файла /proc/filesystems, отсортируйте его и перенаправьте вывод в файл.
+cat /proc/filesystems | cut -f 2 | sort -s | tee /var/lab/3/18
+
+Задание 3.20 Поиск файлов ()
+Для выполнения задания воспользуйтесь утилитами find и sort. Результаты поиска и сортировки перенаправьте в файл.
+find /var/log -type f -mtime -10 -mtime -3 | sort | tee /var/lab/3/20
+
+
+
+
 
 
 
