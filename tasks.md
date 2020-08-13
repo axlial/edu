@@ -312,5 +312,35 @@ yum reinstall diffmark
 Для выполнения задания воспользуйтесь менеджером пакетов yum.
 yum info nano
 
+Задание 10.1 Cron-задание
+Для выполнения задания воспользуйтесь утилитой crontab.
+crontab -e -u user12
+*/5 3 * * 2 date >&2
 
+Задание 10.2 Ротация лога
+Для выполнения задания создайте новый файл /etc/logrotate.d/dmesg.
+vi /etc/logrotate.d/dmesg
+cat /etc/logrotate.d/dmesg
+{
+    missingok
+    daily
+    rotate 30
+    size 10M
+}
+
+Задание 10.3 Расположение логов
+Для выполнения задания загляните в директорию /var/log.
+echo "/var/log/httpd/" > /var/lab/10/3
+
+Задание 10.4 Расположение логов (2)
+Для выполнения задания загляните в директорию /var/log.
+echo "/var/log/nginx" > /var/lab/10/4
+
+Задание 10.5 Вывод IP ###Ошибка в задании!!! в файл /var/lib/10/5 - заменить на /var/lab/10/5
+Для выполнения задания используйте утилиты cat, awk, grep, sort и uniq. Перенаправьте вывод в файл.
+cat /var/log/nginx/access.log | awk {'print$1'}| sort -nr|uniq -c|sort -nr| awk {'print$2'} | tee /var/lab/10/5
+
+
+
+ 
 
